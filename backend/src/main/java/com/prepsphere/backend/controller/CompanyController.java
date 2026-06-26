@@ -20,16 +20,16 @@ public class CompanyController {
 
     // ── GET /api/companies ───────────────────────────────────────────────────
     @GetMapping
-    public ResponseEntity<List<CompanyStats>> getAllCompanies() {
-        List<CompanyStats> statsList = companyService.getAllCompanies();
+    public ResponseEntity<List<CompanyStats>> getAllCompanies(@RequestParam(required = false) String collegeName) {
+        List<CompanyStats> statsList = companyService.getAllCompanies(collegeName);
         return ResponseEntity.ok(statsList);
     }
 
     // ── GET /api/companies/{name} ────────────────────────────────────────────
     @GetMapping("/{name}")
-    public ResponseEntity<?> getCompanyByName(@PathVariable String name) {
+    public ResponseEntity<?> getCompanyByName(@PathVariable String name, @RequestParam(required = false) String collegeName) {
         try {
-            CompanyStats stats = companyService.getCompanyByName(name);
+            CompanyStats stats = companyService.getCompanyByName(name, collegeName);
             return ResponseEntity.ok(stats);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

@@ -28,6 +28,8 @@ public class Experience {
 
     private double ctc;            // Cost to Company offered (in LPA)
 
+    private String collegeName;    // College campus where the company visited
+
     // Embedded list — each round is stored as a nested object inside the same MongoDB document
     private List<Round> rounds;
 

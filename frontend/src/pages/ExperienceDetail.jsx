@@ -116,47 +116,52 @@ const ExperienceDetail = () => {
       </button>
 
       {/* Main Header */}
-      <div className="backdrop-blur-xl bg-surface-card border border-border-divider p-8 sm:p-10 rounded-2xl shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl -z-10"></div>
+      <div className="backdrop-blur-xl bg-[#0C111C] border border-[#161E2E] border-l-4 border-l-[#5C7CFA] p-5 sm:p-8 md:p-10 rounded-l-none rounded-r-lg shadow-xl relative overflow-hidden hover:border-[#3FA9F5]/20 transition-all duration-300">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#3FA9F5]/5 rounded-full blur-3xl -z-10"></div>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-primary/10 text-brand-primary uppercase tracking-wide">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#3FA9F5]/15 text-[#3FA9F5] border border-[#3FA9F5]/20 uppercase tracking-wide">
                 {experience.branch}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-bg-base text-text-muted">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#3FE0C8]/15 text-[#3FE0C8] border border-[#3FE0C8]/20 uppercase tracking-wide">
                 Class of {experience.year}
               </span>
+              {experience.collegeName && (
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#3FE0C8]/15 text-[#3FE0C8] border border-[#3FE0C8]/20 uppercase tracking-wide">
+                  {experience.collegeName}
+                </span>
+              )}
             </div>
-            <h1 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-tight mt-3">
+            <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#E7ECF7] tracking-tight mt-3">
               {experience.companyName}
             </h1>
-            <p className="text-sm text-text-muted mt-1.5">
+            <p className="text-sm text-[#7587A3] mt-1.5 font-medium">
               Interview Experience Log
             </p>
           </div>
 
-          <div className="bg-bg-base border border-border-divider px-6 py-4 text-center min-w-[150px] rounded-2xl">
-            <span className="block text-xs font-semibold text-text-muted uppercase tracking-wider">Salary Package</span>
-            <span className="text-3xl font-heading font-bold text-brand-secondary mt-1 block tabular-nums">
-              {experience.ctc} <span className="text-sm font-semibold text-text-muted font-sans">LPA</span>
+          <div className="bg-[#070B14] border border-[#161E2E] px-6 py-4 text-center min-w-[150px] w-full md:w-auto rounded-2xl shadow-inner">
+            <span className="block text-xs font-semibold text-[#7587A3] uppercase tracking-wider">Salary Package</span>
+            <span className="text-3xl font-heading font-extrabold text-[#3FE0C8] mt-1 block tabular-nums">
+              {experience.ctc} <span className="text-sm font-semibold text-[#7587A3] font-sans">LPA</span>
             </span>
           </div>
         </div>
 
         {/* Action Bar */}
-        <div className="mt-8 pt-6 border-t border-border-divider flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-[#161E2E] flex flex-col sm:flex-row gap-4 sm:gap-0 sm:items-center sm:justify-between">
           <button
             onClick={handleUpvote}
-            className={`flex items-center gap-2 px-4.5 py-2 rounded-xl border text-sm font-bold transition-all active:scale-95 cursor-pointer ${
+            className={`flex items-center justify-center gap-2 px-4.5 py-2 rounded-xl border text-sm font-bold transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer ${
               isUpvotedByMe
-                ? 'bg-brand-secondary text-bg-base border-brand-secondary shadow-md shadow-brand-secondary/10'
-                : 'border-border-divider hover:bg-bg-base text-text-muted hover:text-text-primary'
+                ? 'bg-[#3FE0C8] text-[#06141F] border-[#3FE0C8] shadow-md shadow-[#3FE0C8]/20'
+                : 'border-[#161E2E] hover:bg-[#070B14] text-[#7587A3] hover:text-[#E7ECF7]'
             }`}
           >
             <svg
-              className={`w-5 h-5 ${isUpvotedByMe ? 'fill-bg-base' : 'currentColor'}`}
+              className={`w-5 h-5 ${isUpvotedByMe ? 'fill-[#06141F] text-[#06141F]' : 'currentColor'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -167,8 +172,8 @@ const ExperienceDetail = () => {
             <span>{upvoteCount} Upvotes</span>
           </button>
 
-          <span className="text-sm text-text-muted flex items-center gap-1.5 font-semibold">
-            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <span className="text-sm text-[#7587A3] flex items-center justify-center sm:justify-start gap-1.5 font-semibold">
+            <svg className="w-5 h-5 text-gray-650" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
             </svg>
             {experience.rounds ? experience.rounds.length : 0} rounds total
@@ -176,10 +181,10 @@ const ExperienceDetail = () => {
         </div>
       </div>
 
-      {/* Rounds Log Timeline */}
+      {/* // Rounds Log Timeline */}
       <div className="space-y-6">
-        <h2 className="text-xl font-heading font-bold text-text-primary flex items-center gap-2 px-1">
-          <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <h2 className="text-xl font-heading font-bold text-[#E7ECF7] flex items-center gap-2 px-1">
+          <svg className="w-5 h-5 text-[#3FA9F5]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Interview Process Timeline
@@ -189,14 +194,14 @@ const ExperienceDetail = () => {
           {experience.rounds && experience.rounds.map((round, idx) => (
             <div
               key={idx}
-              className="bg-surface-card border border-border-divider rounded-2xl p-6 sm:p-8 shadow-md relative overflow-hidden"
+              className="bg-[#0C111C] border border-[#161E2E] border-l-4 border-l-[#5C7CFA] rounded-l-none rounded-r-lg p-6 sm:p-8 shadow-md hover:shadow-lg hover:border-[#3FA9F5]/20 transition-all duration-300 relative overflow-hidden"
             >
-              <div className="flex items-center justify-between border-b border-border-divider pb-3 mb-5">
+              <div className="flex items-center justify-between border-b border-[#161E2E] pb-3 mb-5">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center font-bold text-sm">
+                  <span className="w-8 h-8 rounded-lg bg-[#3FE0C8]/15 text-[#3FE0C8] border border-[#3FE0C8]/20 flex items-center justify-center font-extrabold text-sm shadow-inner">
                     {idx + 1}
                   </span>
-                  <h3 className="text-lg font-heading font-bold text-white">
+                  <h3 className="text-lg font-heading font-extrabold text-white tracking-tight">
                     {round.roundType} Round
                   </h3>
                 </div>
@@ -204,16 +209,16 @@ const ExperienceDetail = () => {
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2.5">Questions Asked</h4>
-                  <div className="bg-bg-base/70 p-5 rounded-xl border border-border-divider text-text-primary text-sm leading-relaxed whitespace-pre-wrap">
+                  <h4 className="text-xs font-semibold text-[#7587A3] uppercase tracking-wider mb-2.5">Questions Asked</h4>
+                  <div className="bg-[#070B14]/70 p-5 rounded-xl border border-[#161E2E] text-[#E7ECF7] text-sm leading-relaxed whitespace-pre-wrap">
                     {round.questions}
                   </div>
                 </div>
 
                 {round.notes && (
                   <div>
-                    <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2.5">Notes & Tips</h4>
-                    <div className="bg-brand-primary/5 p-5 rounded-xl border border-brand-primary/10 text-brand-primary/95 text-sm leading-relaxed whitespace-pre-wrap">
+                    <h4 className="text-xs font-semibold text-[#7587A3] uppercase tracking-wider mb-2.5">Notes & Tips</h4>
+                    <div className="bg-[#3FA9F5]/10 p-5 rounded-xl border border-[#3FA9F5]/20 text-[#3FA9F5]/95 text-sm leading-relaxed whitespace-pre-wrap">
                       {round.notes}
                     </div>
                   </div>
@@ -225,9 +230,9 @@ const ExperienceDetail = () => {
       </div>
 
       {/* Discussion / Comments Section */}
-      <div className="space-y-6 border-t border-border-divider pt-8">
-        <h2 className="text-xl font-heading font-bold text-text-primary flex items-center gap-2">
-          <svg className="w-5 h-5 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <div className="space-y-6 border-t border-[#161E2E] pt-8">
+        <h2 className="text-xl font-heading font-bold text-[#E7ECF7] flex items-center gap-2">
+          <svg className="w-5 h-5 text-[#3FE0C8]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
           </svg>
           Discussion ({commentCount})
@@ -241,23 +246,23 @@ const ExperienceDetail = () => {
               placeholder="Ask a clarifying question or say thanks..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="w-full px-4 py-3 bg-surface-card border border-border-divider rounded-xl text-text-primary placeholder-gray-600 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 text-sm resize-y"
+              className="w-full px-4 py-3 bg-[#0C111C] border border-[#161E2E] rounded-xl text-[#E7ECF7] placeholder-[#7587A3] focus:outline-none focus:ring-2 focus:ring-[#3FA9F5]/50 focus:border-[#3FA9F5] text-sm resize-y transition-all"
             />
             <div className="flex justify-end">
               <button
                 type="submit"
                 disabled={submittingComment || !commentText.trim()}
-                className="bg-brand-primary hover:bg-[#5b4cc4] disabled:opacity-50 text-white font-bold py-2 px-5 rounded-xl text-sm transition-all flex items-center gap-2 shadow-md shadow-brand-primary/10 cursor-pointer"
+                className="bg-[#3FA9F5] hover:bg-[#3FA9F5]/90 hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 text-[#06141F] font-extrabold py-2.5 px-5 rounded-xl text-sm transition-all flex items-center gap-2 shadow-md shadow-[#3FA9F5]/15 active:scale-[0.98] cursor-pointer"
               >
                 {submittingComment ? 'Posting...' : 'Post Comment'}
               </button>
             </div>
           </form>
         ) : (
-          <div className="p-6 rounded-xl bg-surface-card border border-border-divider text-center shadow-lg">
+          <div className="p-6 rounded-xl bg-[#0C111C] border border-[#161E2E] text-center shadow-lg">
             <p className="text-sm text-text-muted">
               Want to join the conversation? Please{' '}
-              <Link to="/login" className="text-brand-primary hover:text-[#5b4cc4] font-semibold underline">
+              <Link to="/login" className="text-[#3FA9F5] hover:text-[#3FA9F5]/80 font-semibold underline">
                 Log In
               </Link>{' '}
               to post a comment.
@@ -271,28 +276,28 @@ const ExperienceDetail = () => {
             experience.comments.map((comment, index) => (
               <div
                 key={index}
-                className="bg-surface-card/60 p-5 border border-border-divider rounded-xl flex gap-4 items-start shadow-sm"
+                className="bg-[#0C111C]/60 p-4 sm:p-5 border border-[#161E2E] rounded-xl flex gap-3 sm:gap-4 items-start shadow-sm"
               >
-                <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-gray-700 to-gray-800 flex items-center justify-center text-xs text-text-primary font-bold shrink-0 shadow-md">
+                <div className="w-8.5 h-8.5 rounded-xl bg-[#070B14] border border-[#161E2E] flex items-center justify-center text-xs text-[#E7ECF7] font-bold shrink-0 shadow-md">
                   {comment.userId ? comment.userId.slice(-2).toUpperCase() : 'PS'}
                 </div>
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-sm font-bold text-text-primary">
+                <div className="space-y-1.5 min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-bold text-[#E7ECF7]">
                       Contributor {comment.userId ? comment.userId.slice(-4) : ''}
                     </span>
-                    <span className="text-[10px] text-text-muted font-semibold bg-bg-base px-2 py-0.5 border border-border-divider rounded-md">
+                    <span className="text-[10px] text-[#7587A3] font-semibold bg-[#070B14] px-2 py-0.5 border border-[#161E2E] rounded-md">
                       {comment.date ? new Date(comment.date).toLocaleDateString() : 'Just now'}
                     </span>
                   </div>
-                  <p className="text-sm text-text-primary/90 leading-relaxed">
+                  <p className="text-sm text-[#E7ECF7]/90 leading-relaxed break-words">
                     {comment.text}
                   </p>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center text-xs text-text-muted py-8">
+            <p className="text-center text-xs text-[#7587A3] py-8">
               No comments yet. Start the discussion!
             </p>
           )}

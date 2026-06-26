@@ -26,6 +26,7 @@ public class ExperienceService {
         experience.setYear(request.getYear());
         experience.setBranch(request.getBranch());
         experience.setCtc(request.getCtc());
+        experience.setCollegeName(request.getCollegeName());
         
         // If rounds are provided, copy them; otherwise initialize empty list
         if (request.getRounds() != null) {
@@ -97,5 +98,10 @@ public class ExperienceService {
         comments.add(comment);
         experience.setComments(comments);
         return experienceRepository.save(experience);
+    }
+
+    // ── GET EXPERIENCES BY COLLEGE ───────────────────────────────────────────
+    public List<Experience> getExperiencesByCollege(String collegeName) {
+        return experienceRepository.findByCollegeName(collegeName);
     }
 }

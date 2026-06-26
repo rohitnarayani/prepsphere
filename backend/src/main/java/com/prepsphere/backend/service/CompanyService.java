@@ -20,15 +20,32 @@ public class CompanyService {
 
     // ── GET ALL COMPANIES (Sorted by totalPosts Descending) ──────────────────
     public List<CompanyStats> getAllCompanies() {
+        return getAllCompanies(null);
+    }
+
+    public List<CompanyStats> getAllCompanies(String collegeName) {
         // Build the aggregation pipeline:
-        // 1. Group by companyName, count documents, and calculate average ctc
-        // 2. Sort by totalPosts in descending order
-        Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.group("companyName")
-                        .count().as("totalPosts")
-                        .avg("ctc").as("avgCTC"),
-                Aggregation.sort(Sort.Direction.DESC, "totalPosts")
-        );
+        // 1. Match only by collegeName if provided
+        // 2. Group by companyName, count documents, and calculate average ctc
+        // 3. Sort by totalPosts in descending order
+        
+        Aggregation aggregation;
+        if (collegeName != null && !collegeName.trim().isEmpty()) {
+            aggregation = Aggregation.newAggregation(
+                    Aggregation.match(Criteria.where("collegeName").is(collegeName)),
+                    Aggregation.group("companyName")
+                            .count().as("totalPosts")
+                            .avg("ctc").as("avgCTC"),
+                    Aggregation.sort(Sort.Direction.DESC, "totalPosts")
+            );
+        } else {
+            aggregation = Aggregation.newAggregation(
+                    Aggregation.group("companyName")
+                            .count().as("totalPosts")
+                            .avg("ctc").as("avgCTC"),
+                    Aggregation.sort(Sort.Direction.DESC, "totalPosts")
+            );
+        }
 
         // Execute aggregation on the "experiences" collection and map output to CompanyStats DTO
         AggregationResults<CompanyStats> results = mongoTemplate.aggregate(
@@ -42,11 +59,21 @@ public class CompanyService {
 
     // ── GET COMPANY BY NAME (With distinct visit years list) ─────────────────
     public CompanyStats getCompanyByName(String companyName) {
+        return getCompanyByName(companyName, null);
+    }
+
+    public CompanyStats getCompanyByName(String companyName, String collegeName) {
         // Build the aggregation pipeline:
-        // 1. Match only the experiences for the requested company (case-insensitive or exact)
+        // 1. Match only the experiences for the requested company (and optionally collegeName)
         // 2. Group by companyName, count documents, calculate average ctc, and collect distinct years using addToSet
+        
+        Criteria criteria = Criteria.where("companyName").is(companyName);
+        if (collegeName != null && !collegeName.trim().isEmpty()) {
+            criteria.and("collegeName").is(collegeName);
+        }
+
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("companyName").is(companyName)),
+                Aggregation.match(criteria),
                 Aggregation.group("companyName")
                         .count().as("totalPosts")
                         .avg("ctc").as("avgCTC")
@@ -62,7 +89,7 @@ public class CompanyService {
         List<CompanyStats> mappedResults = results.getMappedResults();
 
         if (mappedResults.isEmpty()) {
-            throw new RuntimeException("Company stats not found for: " + companyName);
+            throw new RuntimeException("Company stats not found for: " + companyName + (collegeName != null ? " at college: " + collegeName : ""));
         }
 
         return mappedResults.get(0);

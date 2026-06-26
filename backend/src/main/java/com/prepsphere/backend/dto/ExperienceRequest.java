@@ -26,5 +26,8 @@ public class ExperienceRequest {
     @Positive(message = "CTC must be a positive value")
     private double ctc;
 
+    @NotBlank(message = "College name is required")
+    private String collegeName;
+
     private List<Experience.Round> rounds;
 }

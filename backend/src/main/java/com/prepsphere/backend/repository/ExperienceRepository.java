@@ -23,4 +23,7 @@ public interface ExperienceRepository extends MongoRepository<Experience, String
 
     // Fetch experiences for a company in a given year
     List<Experience> findByCompanyNameAndYear(String companyName, int year);
+
+    // Fetch all experiences for a specific college (case-sensitive)
+    List<Experience> findByCollegeName(String collegeName);
 }

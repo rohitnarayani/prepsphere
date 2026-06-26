@@ -46,6 +46,13 @@ public class ExperienceController {
         return ResponseEntity.ok(experiences);
     }
 
+    // ── GET /api/experiences/college/{collegeName} (Filter by college) ──────
+    @GetMapping("/college/{collegeName}")
+    public ResponseEntity<List<Experience>> getExperiencesByCollege(@PathVariable String collegeName) {
+        List<Experience> experiences = experienceService.getExperiencesByCollege(collegeName);
+        return ResponseEntity.ok(experiences);
+    }
+
     // ── GET /api/experiences/{id} (Get single experience details) ───────────
     @GetMapping("/{id}")
     public ResponseEntity<?> getExperienceById(@PathVariable String id) {
