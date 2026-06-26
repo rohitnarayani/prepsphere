@@ -16,7 +16,7 @@ public class CorsConfig {
                 // Apply CORS configuration to all endpoints starting with /api/
                 registry.addMapping("/api/**")
                         // Allow requests only from Vite's default dev server port
-                        .allowedOrigins("http://localhost:5173", "https://your-actual-vercel-url.vercel.app")
+                        .allowedOrigins("http://localhost:5173", "https://prepsphere-omega.vercel.app")
                         // Allow common HTTP methods
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         // Allow all request headers
